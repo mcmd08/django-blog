@@ -7,16 +7,17 @@ from django.views.generic.detail import DetailView
 
 # Create your views here.
 def stub_view(request, *args, **kwargs):
-    body = 'Stub View\n\n'
+    body = "Stub View\n\n"
     if args:
-        body += 'Args:\n'
-        body += '\n'.join(['\t%s' % a for a in args])
+        body += "Args:\n"
+        body += "\n".join(["\t%s" % a for a in args])
 
     if kwargs:
-        body += 'Kwargs:\n'
-        body += '\n'.join(['\t%s: %s' % i for i in kwargs.items()])
+        body += "Kwargs:\n"
+        body += "\n".join(["\t%s: %s" % i for i in kwargs.items()])
 
-    return HttpResponse(body, content_type='text\plain')
+    return HttpResponse(body, content_type="text\plain")
+
 
 # Function-based views
 # def list_view(request):
@@ -47,11 +48,14 @@ def stub_view(request, *args, **kwargs):
 # Class-based views
 class PostListView(ListView):
     model = Post
-    queryset = Post.objects.order_by('-published_date').exclude(published_date__exact=None)
-    template_name = 'blogging/list.html'
+    queryset = Post.objects.order_by("-published_date").exclude(
+        published_date__exact=None
+    )
+    template_name = "blogging/list.html"
+
 
 class PostDetailView(DetailView):
     model = Post
     queryset = Post.objects.exclude(published_date__exact=None)
     # print(queryset)
-    template_name = 'blogging/detail.html'
+    template_name = "blogging/detail.html"
