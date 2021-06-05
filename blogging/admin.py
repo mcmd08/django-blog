@@ -4,21 +4,22 @@ from blogging.models import Post, Category
 # Register your models here.
 
 
-
 class CategoryInLine(admin.TabularInline):
     model = Category.posts.through
+
 
 class PostAdmin(admin.ModelAdmin):
     inlines = [
         CategoryInLine,
-        ]
+    ]
+
 
 class CategoryAdmin(admin.ModelAdmin):
     # inlines = [
     #     CategoryInLine,
     #     ]
-    exclude = ('posts',)
+    exclude = ("posts",)
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
-
