@@ -42,7 +42,7 @@ class FrontEndTestCase(TestCase):
                 # publish the first 5  posts
                 pubdate = self.now - self.timedelta * count
                 post.published_date =  pubdate
-                post.save()
+            post.save()
         
     def test_list_only_published(self):
         resp = self.client.get('/')
@@ -63,12 +63,9 @@ class FrontEndTestCase(TestCase):
     def test_details_only_published(self):
         for count in range(1, 11):
             title = 'Post %d Title' % count
-            # print('title is', title)
             post = Post.objects.get(title=title)
-            # print('post is', post, post.pk)
-            resp = self.client.get('/posts/%d/' % post.pk)
-            # print('resp is', resp)
-            
+            resp = self.client.get('/posts/%d' % post.pk)
+
             if count < 6:
                 self.assertEqual(resp.status_code, 200)
                 self.assertContains(resp, title)
