@@ -64,21 +64,27 @@ class PostDetailView(DetailView):
     # print(queryset)
     template_name = "blogging/detail.html"
 
+
 class UserViewSet(viewsets.ModelViewSet):
     """API endpoint that allows users to be viewed or edited"""
-    queryset = User.objects.all().order_by('-date_joined')
+
+    queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+
 class PostViewSet(viewsets.ModelViewSet):
     """API endpoint that allows posts to be viewed or edited"""
+
     model = Post
-    queryset = Post.objects.order_by('-published_date')
+    queryset = Post.objects.order_by("-published_date")
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+
 class CategoryViewSet(viewsets.ModelViewSet):
     """API endpoint that allows categories to be viewed or edited"""
+
     model = Category
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
